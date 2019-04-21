@@ -18,30 +18,13 @@ const ColorBox = ({ colors }) => {
     const newColor = randomColor(colors)
     //* Don't repeat current color
     if (newColor === currentColor) {
-      handleClick(e)
+      handleClick(e) // try again, with same event info
     } else {
       e.target.style.backgroundColor = newColor
     }
   }
 
   return <div className="ColorBox" onClick={handleClick} style={boxStyle} />
-}
-
-ColorBox.defaultProps = {
-  colors: [
-    'cornsilk',
-    'bisque',
-    'burlywood',
-    'rosybrown',
-    'sandybrown',
-    'goldenrod',
-    'darkgoldenrod',
-    'chocolate',
-    'saddlebrown',
-    'brown',
-    'maroon',
-    'firebrick',
-  ],
 }
 
 ColorBox.propTypes = {

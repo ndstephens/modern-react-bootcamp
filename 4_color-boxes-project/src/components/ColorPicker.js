@@ -4,7 +4,7 @@ import './ColorPicker.css'
 
 import ColorBox from './ColorBox'
 
-const ColorPicker = ({ numRows, boxMinWidth }) => {
+const ColorPicker = ({ numRows, boxMinWidth, colors }) => {
   const containerRef = useRef()
   const [numBoxes, setNumBoxes] = useState(0)
 
@@ -23,7 +23,7 @@ const ColorPicker = ({ numRows, boxMinWidth }) => {
   return (
     <div className="ColorPicker" style={pickerStyle} ref={containerRef}>
       {Array.from({ length: numBoxes }).map((box, i) => (
-        <ColorBox key={i} />
+        <ColorBox key={i} colors={colors} />
       ))}
     </div>
   )
@@ -32,11 +32,26 @@ const ColorPicker = ({ numRows, boxMinWidth }) => {
 ColorPicker.defaultProps = {
   numRows: 4,
   boxMinWidth: 150,
+  colors: [
+    'cornsilk',
+    'bisque',
+    'burlywood',
+    'rosybrown',
+    'sandybrown',
+    'goldenrod',
+    'darkgoldenrod',
+    'chocolate',
+    'saddlebrown',
+    'brown',
+    'maroon',
+    'firebrick',
+  ],
 }
 
 ColorPicker.propTypes = {
   numRows: PropTypes.number.isRequired,
   boxMinWidth: PropTypes.number.isRequired,
+  colors: PropTypes.array.isRequired,
 }
 
 export default ColorPicker
