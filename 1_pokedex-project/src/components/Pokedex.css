@@ -1,0 +1,29 @@
+.Pokedex {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.Pokedex__total {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.Pokedex__cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem 3rem;
+}
+
+.Pokedex__winner {
+  font-size: 2rem;
+  color: greenyellow;
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 799px) {
+  .Pokedex__cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

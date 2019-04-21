@@ -1,0 +1,9 @@
+.Die {
+  margin: 0 1rem;
+}
+
+.Die i {
+  font-size: 6rem;
+  color: purple;
+  animation-duration: 1s;
+}

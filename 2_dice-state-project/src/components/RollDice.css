@@ -1,0 +1,22 @@
+.RollDice > * {
+  margin-top: 3rem;
+}
+
+.RollDice__dice {
+  display: flex;
+  justify-content: center;
+}
+
+.RollDice button {
+  padding: 1rem;
+  width: 10rem;
+  color: white;
+  background-color: purple;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.RollDice button:hover,
+.RollDice button:active {
+  color: purple;
+  background-color: white;
+}

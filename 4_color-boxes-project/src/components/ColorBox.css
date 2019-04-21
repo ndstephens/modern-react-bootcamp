@@ -1,0 +1,4 @@
+.ColorBox {
+  /* maintain aspect ratio of height to variable width 1:1 to make a square */
+  padding-top: 100%;
+}
