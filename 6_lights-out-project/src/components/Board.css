@@ -1,0 +1,16 @@
+.Board {
+  margin: 0 auto;
+}
+
+.Board__container {
+  display: inline-block;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.Board__cells {
+  display: grid;
+  gap: 2px;
+  /* justify-content: center; */
+  /* box-shadow: 0 0 0 8px fuchsia; */
+}
