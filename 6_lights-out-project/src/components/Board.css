@@ -1,9 +1,10 @@
 .Board {
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .Board__container {
   display: inline-block;
+  width: 60vw;
   border-radius: 10px;
   overflow: hidden;
 }

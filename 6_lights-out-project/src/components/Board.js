@@ -6,23 +6,12 @@ import './Board.css'
  *
  * Properties:
  *
- * - nrows: number of rows of board
- * - ncols: number of cols of board
- * - chanceLightStartsOn: 0.2,: float, chance any cell is lit at start of game
- *
- * State:
- *
- * - hasWon: boolean, true when board is all off
- * - board: array-of-arrays of true/false
- *
  *    For this board:
  *       .  .  .
  *       O  O  .     (where . is off, and O is on)
  *       .  .  .
  *
  *    This would be: [[f, f, f], [t, t, f], [f, f, f]]
- *
- *  This should render an HTML table of individual <Cell /> components.
  *
  *  This doesn't handle any clicks --- clicks are on individual cells
  *
@@ -41,12 +30,21 @@ class Board extends Component {
   createBoard = () => {
     const { nrows, ncols, chanceLightStartsOn } = this.props
 
-    const board = Array.from({ length: nrows }, row => {
-      return Array.from(
-        { length: ncols },
-        cell => Math.random() < chanceLightStartsOn
-      )
-    })
+    // const board = Array.from({ length: nrows }, row => {
+    //   return Array.from(
+    //     { length: ncols },
+    //     cell => Math.random() < chanceLightStartsOn
+    //   )
+    // })
+
+    const board = []
+    for (let y = 0; y < nrows; y++) {
+      const row = []
+      for (let x = 0; x < ncols; x++) {
+        row[x] = Math.random() < chanceLightStartsOn
+      }
+      board.push(row)
+    }
 
     return board
   }
@@ -64,28 +62,29 @@ class Board extends Component {
     }
 
     //? Flip cell and adjacent cells
-    flipCell(y, x)
-    flipCell(y - 1, x)
-    flipCell(y + 1, x)
-    flipCell(y, x - 1)
-    flipCell(y, x + 1)
+    flipCell(y, x) // the cell
+    flipCell(y - 1, x) // above
+    flipCell(y + 1, x) // below
+    flipCell(y, x - 1) // left
+    flipCell(y, x + 1) // right
 
-    const hasWon = !board.some(row => row.some(cell => cell))
+    //? Check is game is won (all cells are 'false')
+    const hasWon = board.every(row => row.every(cell => !cell))
 
     this.setState({ board, hasWon })
   }
 
   /** Render game board or winning message. */
   render() {
-    const { board, hasWon } = this.state
-    const { nrows, ncols } = this.props
-    const boardStyles = {
-      gridTemplateColumns: `repeat(${ncols}, 100px)`,
-      gridTemplateRows: `repeat(${nrows}, 100px)`,
+    if (this.state.hasWon) {
+      return <h1>YOU WON!!</h1>
     }
 
-    if (hasWon) {
-      return <h1>You Won</h1>
+    const { board } = this.state
+    const { nrows, ncols } = this.props
+    const boardStyles = {
+      gridTemplateColumns: `repeat(${ncols}, 1fr)`,
+      gridTemplateRows: `repeat(${nrows}, 1fr)`,
     }
 
     return (
@@ -115,7 +114,7 @@ class Board extends Component {
 Board.defaultProps = {
   nrows: 5,
   ncols: 5,
-  chanceLightStartsOn: 0.25,
+  chanceLightStartsOn: 0.2,
 }
 
 export default Board
