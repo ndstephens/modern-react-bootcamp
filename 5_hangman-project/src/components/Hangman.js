@@ -19,8 +19,6 @@ class Hangman extends Component {
     nWrong: 0,
     guessed: new Set(),
     answer: getRandom(ENGLISH_WORDS),
-    isPlaying: true,
-    winner: false,
   }
 
   restartGame = () => {
@@ -28,8 +26,6 @@ class Hangman extends Component {
       nWrong: 0,
       guessed: new Set(),
       answer: getRandom(ENGLISH_WORDS),
-      isPlaying: true,
-      winner: false,
     })
   }
 
@@ -42,53 +38,53 @@ class Hangman extends Component {
       .map(ltr => (this.state.guessed.has(ltr) ? ltr : '_'))
   }
 
-  /** handleGuest: handle a guessed letter:
+  /** handleGuess: handle a guessed letter:
     - add to guessed letters
     - if not in answer, increase number-wrong guesses
   */
-  handleGuess = evt => {
-    let ltr = evt.target.value
-    this.setState(
-      st => ({
-        guessed: st.guessed.add(ltr),
-        nWrong: st.nWrong + (st.answer.includes(ltr) ? 0 : 1),
-      }),
-      () => {
-        if (this.state.nWrong >= this.props.maxWrong) {
-          return this.setState({ isPlaying: false })
-        }
-        if (!this.guessedWord().includes('_')) {
-          return this.setState({ isPlaying: false, winner: true })
-        }
-      }
-    )
+  handleGuess = e => {
+    let ltr = e.target.value
+    this.setState(st => ({
+      guessed: st.guessed.add(ltr),
+      nWrong: st.nWrong + (st.answer.includes(ltr) ? 0 : 1),
+    }))
   }
 
   /** render: render game */
   render() {
-    const { nWrong, isPlaying, answer, guessed, winner } = this.state
+    const { nWrong, answer, guessed } = this.state
     const { maxWrong, images, letters } = this.props
+
+    const isWinner = !this.guessedWord().includes('_')
+    const isPlaying = nWrong < maxWrong && !isWinner
 
     return (
       <div className="Hangman">
+        {/* <p>{answer}</p> */}
         <h1>Hangman</h1>
         <img src={images[nWrong]} alt={`${nWrong}/${maxWrong} wrong`} />
-        <h3>{isPlaying ? `Number wrong: ${nWrong}` : 'Game Over'}</h3>
-        <h3>{!isPlaying && winner && 'YOU WON'}</h3>
-        <p>{answer}</p>
-        <p className="Hangman-word">{this.guessedWord()}</p>
+        <h3>Guessed wrong: {nWrong}</h3>
+        <p className="Hangman-word">
+          {isPlaying ? this.guessedWord() : [...answer]}
+        </p>
 
-        {isPlaying ? (
+        {isPlaying && (
           <AlphaButtons
             letters={letters}
             handleGuess={this.handleGuess}
             guessed={guessed}
           />
-        ) : null}
+        )}
 
-        <div onClick={this.restartGame} style={{ cursor: 'pointer' }}>
+        {!isPlaying && (isWinner ? 'YOU WON' : 'YOU LOST')}
+
+        <button
+          className="Hangman__reset"
+          onClick={this.restartGame}
+          style={{ cursor: 'pointer' }}
+        >
           RESTART GAME
-        </div>
+        </button>
       </div>
     )
   }
