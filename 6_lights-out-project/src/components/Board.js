@@ -77,7 +77,12 @@ class Board extends Component {
   /** Render game board or winning message. */
   render() {
     if (this.state.hasWon) {
-      return <h1>YOU WON!!</h1>
+      return (
+        <div className="Board__title winner">
+          <span className="neon neon-orange">YOU</span>{' '}
+          <span className="neon neon-blue">WON!!</span>
+        </div>
+      )
     }
 
     const { board } = this.state
@@ -89,7 +94,10 @@ class Board extends Component {
 
     return (
       <div className="Board">
-        <h1>Lights Out</h1>
+        <div className="Board__title">
+          <span className="neon neon-orange">Lights</span>{' '}
+          <span className="neon neon-blue">Out</span>
+        </div>
         <div className="Board__container">
           <div className="Board__cells" style={boardStyles}>
             {board.map((row, yIndex) => {
