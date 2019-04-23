@@ -1,19 +1,20 @@
 import React, { useState, useRef } from 'react'
+import uuid from 'uuid/v4'
 
-const NewBoxForm = ({ onSubmit }) => {
-  const [width, setWidth] = useState('')
-  const [height, setHeight] = useState('')
-  const [backgroundColor, setBackgroundColor] = useState('')
-
-  const widthInput = useRef(null)
+const NewBoxForm = ({ createBox }) => {
+  const [box, setBox] = useState({ width: '', height: '', backgroundColor: '' })
+  const primaryInput = useRef(null)
 
   const handleSubmit = e => {
     e.preventDefault()
-    onSubmit({ width, height, backgroundColor })
-    setWidth('')
-    setHeight('')
-    setBackgroundColor('')
-    widthInput.current.focus()
+    createBox({ ...box, id: uuid() })
+    // reset all inputs and input focus
+    setBox({ width: '', height: '', backgroundColor: '' })
+    primaryInput.current.focus()
+  }
+
+  const handleChange = e => {
+    setBox({ ...box, [e.target.name]: e.target.value })
   }
 
   return (
@@ -22,9 +23,10 @@ const NewBoxForm = ({ onSubmit }) => {
         <label htmlFor="width">width</label>
         <input
           autoFocus
-          ref={widthInput}
-          value={width}
-          onChange={e => setWidth(e.target.value)}
+          ref={primaryInput}
+          value={box.width}
+          name="width"
+          onChange={handleChange}
           type="text"
           id="width"
         />
@@ -32,17 +34,19 @@ const NewBoxForm = ({ onSubmit }) => {
       <div>
         <label htmlFor="height">height</label>
         <input
-          value={height}
-          onChange={e => setHeight(e.target.value)}
+          value={box.height}
+          name="height"
+          onChange={handleChange}
           type="text"
           id="height"
         />
       </div>
       <div>
-        <label htmlFor="backgroundColor">backgroundColor</label>
+        <label htmlFor="backgroundColor">color</label>
         <input
-          value={backgroundColor}
-          onChange={e => setBackgroundColor(e.target.value)}
+          value={box.backgroundColor}
+          name="backgroundColor"
+          onChange={handleChange}
           type="text"
           id="backgroundColor"
         />

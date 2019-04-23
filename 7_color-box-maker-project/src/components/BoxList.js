@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import uuid from 'uuid/v4'
 
 import NewBoxForm from './NewBoxForm'
 import Box from './Box'
@@ -7,22 +6,23 @@ import Box from './Box'
 const BoxList = props => {
   const [boxes, setBoxes] = useState([])
 
-  const handleFormSubmit = box => {
-    setBoxes([...boxes, { ...box, id: uuid() }])
+  const createBox = box => {
+    setBoxes([box, ...boxes])
   }
 
   const deleteBox = id => {
     setBoxes(boxes.filter(box => box.id !== id))
   }
 
+  const boxUI = boxes.map(box => (
+    <Box {...box} deleteBox={deleteBox} key={box.id} />
+  ))
+
   return (
     <div>
-      <NewBoxForm onSubmit={handleFormSubmit} />
-      <div>
-        {boxes.map(box => (
-          <Box {...box} deleteBox={deleteBox} key={box.id} />
-        ))}
-      </div>
+      <h1>Make a box!!</h1>
+      <NewBoxForm createBox={createBox} />
+      {boxUI}
     </div>
   )
 }
