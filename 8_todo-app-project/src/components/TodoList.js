@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import uuid from 'uuid/v4'
+import './TodoList.css'
 
 import NewTodoForm from './NewTodoForm'
 import Todo from './Todo'
 
 const TodoList = props => {
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem('todos')) || []
+  )
 
   const addTodo = task => {
     const todo = { id: uuid(), name: task, completed: false }
-    setTodos([todo, ...todos])
+    const newTodos = [todo, ...todos]
+    setTodos(newTodos)
+    localStorage.setItem('todos', JSON.stringify(newTodos))
   }
 
   const toggleCompleted = id => {
@@ -21,6 +26,7 @@ const TodoList = props => {
       return todo
     })
     setTodos(updatedTodos)
+    localStorage.setItem('todos', JSON.stringify(updatedTodos))
   }
 
   const updateTodo = (id, name) => {
@@ -32,29 +38,31 @@ const TodoList = props => {
       return todo
     })
     setTodos(updatedTodos)
+    localStorage.setItem('todos', JSON.stringify(updatedTodos))
   }
 
   const deleteTodo = id => {
-    const filteredTodos = todos.filter(todo => todo.id !== id)
-    setTodos(filteredTodos)
+    const updatedTodos = todos.filter(todo => todo.id !== id)
+    setTodos(updatedTodos)
+    localStorage.setItem('todos', JSON.stringify(updatedTodos))
   }
 
+  const displayTodos = todos.map(todo => (
+    <Todo
+      todo={todo}
+      deleteTodo={deleteTodo}
+      toggleCompleted={toggleCompleted}
+      updateTodo={updateTodo}
+      key={todo.id}
+    />
+  ))
+
   return (
-    <>
-      <h1>Todo List</h1>
-      <div>
-        {todos.map(todo => (
-          <Todo
-            todo={todo}
-            deleteTodo={deleteTodo}
-            toggleCompleted={toggleCompleted}
-            updateTodo={updateTodo}
-            key={todo.id}
-          />
-        ))}
-      </div>
+    <div>
+      <h1>Todo List!</h1>
+      <ul>{displayTodos}</ul>
       <NewTodoForm addTodo={addTodo} />
-    </>
+    </div>
   )
 }
 
