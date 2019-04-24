@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import uuid from 'uuid/v4'
+
 import './NewTodoForm.css'
 
 const NewTodoForm = ({ addTodo }) => {
@@ -10,20 +12,21 @@ const NewTodoForm = ({ addTodo }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    addTodo(taskName)
+    addTodo({ id: uuid(), name: taskName, completed: false })
     setTaskName('')
   }
 
   return (
     <div className="NewTodoForm">
-      <p className="NewTodoForm__title">New Todo</p>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="task">New Todo</label>
         <input
           autoFocus
           value={taskName}
           onChange={handleChange}
           type="text"
           placeholder="New Todo"
+          id="task"
         />
         <button>Add Todo</button>
       </form>

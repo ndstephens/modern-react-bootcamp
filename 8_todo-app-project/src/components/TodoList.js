@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import uuid from 'uuid/v4'
 import './TodoList.css'
 
 import NewTodoForm from './NewTodoForm'
@@ -10,8 +9,7 @@ const TodoList = props => {
     JSON.parse(localStorage.getItem('todos')) || []
   )
 
-  const addTodo = task => {
-    const todo = { id: uuid(), name: task, completed: false }
+  const addTodo = todo => {
     const newTodos = [todo, ...todos]
     setTodos(newTodos)
     localStorage.setItem('todos', JSON.stringify(newTodos))
@@ -20,8 +18,7 @@ const TodoList = props => {
   const toggleCompleted = id => {
     const updatedTodos = todos.map(todo => {
       if (todo.id === id) {
-        todo.completed = !todo.completed
-        return todo
+        return { ...todo, completed: !todo.completed }
       }
       return todo
     })
@@ -29,11 +26,10 @@ const TodoList = props => {
     localStorage.setItem('todos', JSON.stringify(updatedTodos))
   }
 
-  const updateTodo = (id, name) => {
+  const updateTodo = (id, updatedName) => {
     const updatedTodos = todos.map(todo => {
       if (todo.id === id) {
-        todo.name = name
-        return todo
+        return { ...todo, name: updatedName }
       }
       return todo
     })
@@ -49,11 +45,11 @@ const TodoList = props => {
 
   const displayTodos = todos.map(todo => (
     <Todo
+      key={todo.id}
       todo={todo}
-      deleteTodo={deleteTodo}
       toggleCompleted={toggleCompleted}
       updateTodo={updateTodo}
-      key={todo.id}
+      deleteTodo={deleteTodo}
     />
   ))
 

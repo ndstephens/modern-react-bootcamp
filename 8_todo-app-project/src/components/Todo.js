@@ -12,10 +12,10 @@ const Todo = ({ todo, deleteTodo, toggleCompleted, updateTodo }) => {
   }
 
   const handleEditMode = () => {
-    setEditMode(!editMode)
+    setEditMode(prevEditMode => !prevEditMode)
   }
 
-  const handleUpdateSubmit = e => {
+  const handleUpdateTodo = e => {
     e.preventDefault()
     updateTodo(todo.id, taskName)
     handleEditMode()
@@ -30,7 +30,7 @@ const Todo = ({ todo, deleteTodo, toggleCompleted, updateTodo }) => {
   }
 
   return (
-    <div>
+    <>
       {!editMode && (
         <div>
           <p onClick={handleCompleted} className={`${completed}`}>
@@ -42,7 +42,7 @@ const Todo = ({ todo, deleteTodo, toggleCompleted, updateTodo }) => {
       )}
       {editMode && (
         <div>
-          <form onSubmit={handleUpdateSubmit}>
+          <form onSubmit={handleUpdateTodo}>
             <input
               autoFocus
               type="text"
@@ -53,7 +53,7 @@ const Todo = ({ todo, deleteTodo, toggleCompleted, updateTodo }) => {
           </form>
         </div>
       )}
-    </div>
+    </>
   )
 }
 
