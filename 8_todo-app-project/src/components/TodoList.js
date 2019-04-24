@@ -10,7 +10,7 @@ const TodoList = props => {
   )
 
   const addTodo = todo => {
-    const newTodos = [todo, ...todos]
+    const newTodos = [...todos, todo]
     setTodos(newTodos)
     localStorage.setItem('todos', JSON.stringify(newTodos))
   }
@@ -54,7 +54,7 @@ const TodoList = props => {
   ))
 
   return (
-    <div>
+    <div className="TodoList">
       <h1>Todo List!</h1>
       <ul>{displayTodos}</ul>
       <NewTodoForm addTodo={addTodo} />

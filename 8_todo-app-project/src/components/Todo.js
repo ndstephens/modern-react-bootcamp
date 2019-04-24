@@ -32,17 +32,23 @@ const Todo = ({ todo, deleteTodo, toggleCompleted, updateTodo }) => {
   return (
     <>
       {!editMode && (
-        <div>
-          <p onClick={handleCompleted} className={`${completed}`}>
+        <div className="Todo">
+          <li onClick={handleCompleted} className={`Todo__task ${completed}`}>
             {todo.name}
-          </p>
-          <button onClick={handleEditMode}>edit</button>
-          <button onClick={handleDelete}>X</button>
+          </li>
+          <div className="Todo__buttons">
+            <button onClick={handleEditMode}>
+              <i className="fas fa-pen" />
+            </button>
+            <button onClick={handleDelete}>
+              <i className="fas fa-trash" />
+            </button>
+          </div>
         </div>
       )}
       {editMode && (
-        <div>
-          <form onSubmit={handleUpdateTodo}>
+        <div className="Todo">
+          <form className="Todo__edit-form" onSubmit={handleUpdateTodo}>
             <input
               autoFocus
               type="text"

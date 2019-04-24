@@ -17,20 +17,18 @@ const NewTodoForm = ({ addTodo }) => {
   }
 
   return (
-    <div className="NewTodoForm">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="task">New Todo</label>
-        <input
-          autoFocus
-          value={taskName}
-          onChange={handleChange}
-          type="text"
-          placeholder="New Todo"
-          id="task"
-        />
-        <button>Add Todo</button>
-      </form>
-    </div>
+    <form className="NewTodoForm" onSubmit={handleSubmit}>
+      <label htmlFor="task">New Todo</label>
+      <input
+        autoFocus
+        value={taskName}
+        onChange={handleChange}
+        type="text"
+        placeholder="New Todo"
+        id="task"
+      />
+      <button>Add Todo</button>
+    </form>
   )
 }
 
