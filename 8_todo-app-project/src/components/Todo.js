@@ -30,14 +30,14 @@ const Todo = ({ todo, deleteTodo, toggleCompleted, updateTodo }) => {
   }
 
   return (
-    <>
+    <div>
       {!editMode && (
         <div>
           <p onClick={handleCompleted} className={`${completed}`}>
             {todo.name}
           </p>
-          <i onClick={handleEditMode}>edit</i>
-          <i onClick={handleDelete}>X</i>
+          <button onClick={handleEditMode}>edit</button>
+          <button onClick={handleDelete}>X</button>
         </div>
       )}
       {editMode && (
@@ -53,7 +53,7 @@ const Todo = ({ todo, deleteTodo, toggleCompleted, updateTodo }) => {
           </form>
         </div>
       )}
-    </>
+    </div>
   )
 }
 
