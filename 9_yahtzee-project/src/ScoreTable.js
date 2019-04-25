@@ -18,6 +18,12 @@ import {
 } from './Rules'
 
 class ScoreTable extends Component {
+  totalScores = () => {
+    return Object.values(this.props.scores).reduce((total, cur) => {
+      return total + (cur || 0)
+    }, 0)
+  }
+
   render() {
     const { scores, doScore } = this.props
 
@@ -119,6 +125,7 @@ class ScoreTable extends Component {
             </tbody>
           </table>
         </section>
+        <h2>TOTAL SCORE: {this.totalScores()}</h2>
       </div>
     )
   }
