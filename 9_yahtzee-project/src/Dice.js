@@ -4,7 +4,7 @@ import './Dice.css'
 
 class Dice extends Component {
   render() {
-    const { dice, locked, toggleLocked } = this.props
+    const { dice, locked, toggleLocked, disabled } = this.props
 
     return (
       <div className="Dice">
@@ -14,6 +14,7 @@ class Dice extends Component {
             val={d}
             locked={locked[idx]}
             idx={idx}
+            disabled={disabled}
             key={idx}
           />
         ))}

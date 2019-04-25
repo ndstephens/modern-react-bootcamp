@@ -72,6 +72,7 @@ class Game extends Component {
               dice={this.state.dice}
               locked={this.state.locked}
               toggleLocked={this.toggleLocked}
+              disabled={this.state.rollsLeft === 0}
             />
 
             <div className="Game-button-wrapper">
@@ -82,7 +83,7 @@ class Game extends Component {
                 }
                 onClick={this.roll}
               >
-                {this.state.rollsLeft} Rerolls Left
+                {this.state.rollsLeft} Rolls Left
               </button>
             </div>
           </section>

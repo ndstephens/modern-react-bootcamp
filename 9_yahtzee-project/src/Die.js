@@ -7,18 +7,19 @@ class Die extends Component {
   }
 
   render() {
-    const { locked, val } = this.props
+    const { locked, val, dieVals, disabled } = this.props
+    const classes = `Die ${locked ? 'Die-locked' : ''} fas fa-5x fa-dice-${
+      dieVals[val - 1]
+    }`
 
     return (
-      <button
-        className={'Die'}
-        style={{ backgroundColor: locked ? 'grey' : 'black' }}
-        onClick={this.handleClick}
-      >
-        {val}
-      </button>
+      <i className={classes} onClick={this.handleClick} disabled={disabled} />
     )
   }
+}
+
+Die.defaultProps = {
+  dieVals: ['one', 'two', 'three', 'four', 'five', 'six'],
 }
 
 export default Die
