@@ -3,14 +3,17 @@ import './Die.css'
 
 class Die extends Component {
   handleClick = () => {
-    this.props.toggleLocked(this.props.idx)
+    if (!this.props.isRolling) {
+      this.props.toggleLocked(this.props.idx)
+    }
   }
 
   render() {
-    const { locked, val, dieVals, disabled } = this.props
-    const classes = `Die ${locked ? 'Die-locked' : ''} fas fa-5x fa-dice-${
-      dieVals[val - 1]
-    }`
+    const { isLocked, val, dieVals, disabled, isRolling } = this.props
+
+    let classes = `Die fas fa-5x fa-dice-${dieVals[val - 1]} `
+    if (isLocked) classes += ' Die-locked'
+    if (isRolling && !isLocked) classes += ' Die-rolling'
 
     return (
       <i className={classes} onClick={this.handleClick} disabled={disabled} />
