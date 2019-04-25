@@ -3,7 +3,7 @@ import './RuleRow.css'
 
 class RuleRow extends Component {
   render() {
-    const { name, score, doScore } = this.props
+    const { name, description, score, doScore } = this.props
     const active = score === undefined
 
     const setClass = active ? 'active' : 'disabled'
@@ -14,7 +14,7 @@ class RuleRow extends Component {
         onClick={active ? doScore : null}
       >
         <td className="RuleRow-name">{name}</td>
-        <td className="RuleRow-score">{score}</td>
+        <td className="RuleRow-score">{active ? description : score}</td>
       </tr>
     )
   }
