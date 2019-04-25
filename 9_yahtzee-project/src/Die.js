@@ -1,18 +1,24 @@
-import React, { Component } from "react";
-import "./Die.css";
+import React, { Component } from 'react'
+import './Die.css'
 
 class Die extends Component {
+  handleClick = () => {
+    this.props.toggleLocked(this.props.idx)
+  }
+
   render() {
+    const { locked, val } = this.props
+
     return (
       <button
-        className={"Die"}
-        style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
-        onClick={this.props.handleClick}
+        className={'Die'}
+        style={{ backgroundColor: locked ? 'grey' : 'black' }}
+        onClick={this.handleClick}
       >
-        {this.props.val}
+        {val}
       </button>
-    );
+    )
   }
 }
 
-export default Die;
+export default Die
