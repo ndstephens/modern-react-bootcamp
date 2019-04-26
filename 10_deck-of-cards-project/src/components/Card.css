@@ -1,0 +1,4 @@
+.Card {
+  position: absolute;
+  /* transform: translateX(calc(-50% + 2px)) translateY(-3px) rotate(-8deg); */
+}
