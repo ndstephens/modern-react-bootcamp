@@ -1,8 +1,37 @@
 .Joke {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .Joke__voting {
+  margin: 1rem;
   display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.Joke__voting i {
+  cursor: pointer;
+}
+
+.Joke__num-votes {
+  padding: 1rem;
+  margin: 0 5px;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Joke__text {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.Joke__emoji {
+  margin-left: auto;
 }

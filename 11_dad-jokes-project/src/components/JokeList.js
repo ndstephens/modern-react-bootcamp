@@ -33,16 +33,26 @@ class JokeList extends Component {
         !this.jokeIsDuplicate(this.state.jokeList, id) &&
         !this.jokeIsDuplicate(jokes, id)
       ) {
-        jokes.push({ id, joke })
+        jokes.push({ id, joke, votes: 0 })
       }
     }
 
     this.setState(prevSt => ({ jokeList: [...prevSt.jokeList, ...jokes] }))
   }
 
+  handleVote = (jokeId, vote) => {
+    this.setState(prevSt => ({
+      jokeList: prevSt.jokeList.map(joke =>
+        joke.id === jokeId ? { ...joke, votes: joke.votes + vote } : joke
+      ),
+    }))
+  }
+
   render() {
     const { jokeList } = this.state
-    const jokes = jokeList.map(joke => <Joke {...joke} key={joke.id} />)
+    const jokes = jokeList.map(joke => (
+      <Joke {...joke} key={joke.id} handleVote={this.handleVote} />
+    ))
 
     return (
       <div className="JokeList">
