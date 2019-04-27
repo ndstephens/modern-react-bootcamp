@@ -7,6 +7,7 @@ import Joke from './Joke'
 class JokeList extends Component {
   state = {
     jokeList: JSON.parse(localStorage.getItem('jokes')) || [],
+    isLoading: false,
   }
 
   componentDidMount() {
@@ -20,6 +21,8 @@ class JokeList extends Component {
   }
 
   getJokes = async (numJokes = 10) => {
+    this.setState({ isLoading: true })
+
     function getJoke() {
       return axios.get('https://icanhazdadjoke.com/', {
         headers: { Accept: 'application/json' },
@@ -40,7 +43,10 @@ class JokeList extends Component {
     }
 
     this.setState(
-      prevSt => ({ jokeList: [...prevSt.jokeList, ...jokes] }),
+      prevSt => ({
+        jokeList: [...prevSt.jokeList, ...jokes],
+        isLoading: false,
+      }),
       () => localStorage.setItem('jokes', JSON.stringify(this.state.jokeList))
     )
   }
@@ -57,6 +63,15 @@ class JokeList extends Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div className="JokeList__spinner">
+          <i className="far fa-8x fa-laugh fa-spin" />
+          <h1 className="JokeList__title">Loading...</h1>
+        </div>
+      )
+    }
+
     const { jokeList } = this.state
     const jokes = jokeList
       .sort((a, b) => b.votes - a.votes)
