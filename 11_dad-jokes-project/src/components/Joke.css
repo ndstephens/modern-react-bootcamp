@@ -42,6 +42,11 @@
 .Joke__emoji {
   margin-left: auto;
   font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.Joke__emoji i {
   border-radius: 50%;
   box-shadow: 0 10px 38px rgba(0, 0, 0, 0.2), 0 10px 12px rgba(0, 0, 0, 0.1);
 }

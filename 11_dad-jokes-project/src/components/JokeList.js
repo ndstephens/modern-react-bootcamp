@@ -9,7 +9,7 @@ class JokeList extends Component {
     jokeList: JSON.parse(localStorage.getItem('jokes')) || [],
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (this.state.jokeList.length === 0) {
       this.getJokes(10)
     }
@@ -74,8 +74,14 @@ class JokeList extends Component {
             src="https://assets.dryicons.com/uploads/icon/svg/8927/0eb14c71-38f2-433a-bfc8-23d9c99b3647.svg"
             alt="Laughing Emoji"
           />
-          <button className="JokeList__getMore-btn">New Jokes</button>
+          <button
+            onClick={() => this.getJokes()}
+            className="JokeList__getMore-btn"
+          >
+            New Jokes
+          </button>
         </div>
+
         <div className="JokeList__jokes">{jokes}</div>
       </div>
     )
