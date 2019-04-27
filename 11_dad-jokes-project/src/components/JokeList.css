@@ -41,6 +41,36 @@
   letter-spacing: 0;
 }
 
+.JokeList__getMore-btn {
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(179, 229, 252);
+  min-width: 50%;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+  border: none;
+  outline: none;
+  word-spacing: 1rem;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgb(179, 229, 252) 0% 50%,
+    rgb(240, 98, 146) 50% 100%
+  );
+  background-size: 105%;
+  background-position: right;
+  transition: box-shadow 300ms, transform 300ms;
+}
+.JokeList__getMore-btn span {
+  color: rgb(240, 98, 146);
+}
+.JokeList__getMore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
 .JokeList__jokes {
   height: 90%;
   background-color: white;

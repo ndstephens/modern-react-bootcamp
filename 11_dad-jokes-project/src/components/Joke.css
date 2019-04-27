@@ -36,6 +36,7 @@
   display: flex;
   align-items: center;
   width: 75%;
+  margin-right: 1rem;
   /* font-size: 1.2rem; */
 }
 
