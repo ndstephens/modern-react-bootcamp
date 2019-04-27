@@ -7,6 +7,8 @@ const Joke = ({ id, joke, votes, handleVote }) => {
     if (e.target.id === 'down') handleVote(id, -1)
   }
 
+  const classname = 'em em-rolling_on_the_floor_laughing'
+
   return (
     <div className="Joke">
       <div className="Joke__voting">
@@ -15,7 +17,9 @@ const Joke = ({ id, joke, votes, handleVote }) => {
         <i className="fas fa-arrow-down" onClick={handleClick} id="down" />
       </div>
       <div className="Joke__text">{joke}</div>
-      <div className="Joke__emoji">Emoji</div>
+      <div className="Joke__emoji">
+        <i className={classname} />
+      </div>
     </div>
   )
 }
