@@ -6,11 +6,13 @@ import Joke from './Joke'
 
 class JokeList extends Component {
   state = {
-    jokeList: [],
+    jokeList: JSON.parse(localStorage.getItem('jokes')) || [],
   }
 
-  componentDidMount() {
-    this.getJokes(10)
+  async componentDidMount() {
+    if (this.state.jokeList.length === 0) {
+      this.getJokes(10)
+    }
   }
 
   jokeIsDuplicate = (jokeList, jokeId) => {
@@ -37,22 +39,30 @@ class JokeList extends Component {
       }
     }
 
-    this.setState(prevSt => ({ jokeList: [...prevSt.jokeList, ...jokes] }))
+    this.setState(
+      prevSt => ({ jokeList: [...prevSt.jokeList, ...jokes] }),
+      () => localStorage.setItem('jokes', JSON.stringify(this.state.jokeList))
+    )
   }
 
   handleVote = (jokeId, vote) => {
-    this.setState(prevSt => ({
-      jokeList: prevSt.jokeList.map(joke =>
-        joke.id === jokeId ? { ...joke, votes: joke.votes + vote } : joke
-      ),
-    }))
+    this.setState(
+      prevSt => ({
+        jokeList: prevSt.jokeList.map(joke =>
+          joke.id === jokeId ? { ...joke, votes: joke.votes + vote } : joke
+        ),
+      }),
+      () => localStorage.setItem('jokes', JSON.stringify(this.state.jokeList))
+    )
   }
 
   render() {
     const { jokeList } = this.state
-    const jokes = jokeList.map(joke => (
-      <Joke {...joke} key={joke.id} handleVote={this.handleVote} />
-    ))
+    const jokes = jokeList
+      .sort((a, b) => b.votes - a.votes)
+      .map(joke => (
+        <Joke {...joke} key={joke.id} handleVote={this.handleVote} />
+      ))
 
     return (
       <div className="JokeList">
