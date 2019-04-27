@@ -1,0 +1,8 @@
+.Joke {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Joke__voting {
+  display: flex;
+}
