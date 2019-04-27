@@ -61,6 +61,15 @@ class JokeList extends Component {
     )
   }
 
+  handleMouseEnter = e => {
+    const emoji = e.target
+    emoji.classList.add('rubberBand')
+    setTimeout(() => {
+      emoji.classList.remove('rubberBand')
+    }, 1000)
+  }
+  // handleMouseLeave = e => e.target.classList.remove('rubberBand')
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -86,6 +95,9 @@ class JokeList extends Component {
           </h1>
 
           <img
+            onMouseEnter={this.handleMouseEnter}
+            // onMouseLeave={this.handleMouseLeave}
+            className="animated"
             src="https://assets.dryicons.com/uploads/icon/svg/8927/0eb14c71-38f2-433a-bfc8-23d9c99b3647.svg"
             alt="Laughing Emoji"
           />
