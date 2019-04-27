@@ -3,13 +3,13 @@ import './Joke.css'
 
 const Joke = ({ id, joke }) => {
   return (
-    <li className="Joke">
+    <div className="Joke">
       <div className="Joke__voting">
-        <div>Vote</div>
-        <div>{joke}</div>
+        <div className="Joke__vote" />
+        <div className="Joke__text">{joke}</div>
       </div>
       <div>Emoji</div>
-    </li>
+    </div>
   )
 }
 

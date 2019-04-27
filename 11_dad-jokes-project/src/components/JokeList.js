@@ -30,7 +30,7 @@ class JokeList extends Component {
         data: { id, joke },
       } = await getJoke()
       if (
-        !this.jokeIsDuplicate(this.state.jokeList, id) ||
+        !this.jokeIsDuplicate(this.state.jokeList, id) &&
         !this.jokeIsDuplicate(jokes, id)
       ) {
         jokes.push({ id, joke })
@@ -47,11 +47,16 @@ class JokeList extends Component {
     return (
       <div className="JokeList">
         <div className="JokeList__sidebar">
-          <h1>Dad Jokes</h1>
-          <div>Emoji Button</div>
-          <div>New Jokes</div>
+          <h1 className="JokeList__title">
+            <span>Dad</span> Jokes
+          </h1>
+          <img
+            src="https://assets.dryicons.com/uploads/icon/svg/8927/0eb14c71-38f2-433a-bfc8-23d9c99b3647.svg"
+            alt="Laughing Emoji"
+          />
+          <button className="JokeList__getMore-btn">New Jokes</button>
         </div>
-        <ul className="JokeList__jokes">{jokes}</ul>
+        <div className="JokeList__jokes">{jokes}</div>
       </div>
     )
   }
