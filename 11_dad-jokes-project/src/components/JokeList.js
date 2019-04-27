@@ -11,44 +11,43 @@ class JokeList extends Component {
   }
 
   componentDidMount() {
+    // Initialize Set that keeps track of joke ID's to prevent duplicates
+    this.jokeIdSet = new Set(this.state.jokeList.map(joke => joke.id))
+
     if (this.state.jokeList.length === 0) {
       this.getJokes(10)
     }
   }
 
-  jokeIsDuplicate = (jokeList, jokeId) => {
-    return jokeList.some(joke => joke.id === jokeId)
-  }
-
   getJokes = async (numJokes = 10) => {
-    this.setState({ isLoading: true })
+    try {
+      this.setState({ isLoading: true })
 
-    function getJoke() {
-      return axios.get('https://icanhazdadjoke.com/', {
-        headers: { Accept: 'application/json' },
-      })
-    }
-
-    const jokes = []
-    while (jokes.length < numJokes) {
-      const {
-        data: { id, joke },
-      } = await getJoke()
-      if (
-        !this.jokeIsDuplicate(this.state.jokeList, id) &&
-        !this.jokeIsDuplicate(jokes, id)
-      ) {
-        jokes.push({ id, joke, votes: 0 })
+      const jokes = []
+      while (jokes.length < numJokes) {
+        const {
+          data: { id, joke },
+        } = await axios.get('https://icanhazdadjoke.com/', {
+          headers: { Accept: 'application/json' },
+        })
+        // Only add joke if joke ID is NOT already in jokeIdSet (to keep track of ID's)
+        if (!this.jokeIdSet.has(id)) {
+          this.jokeIdSet.add(id)
+          jokes.push({ id, joke, votes: 0 })
+        }
       }
-    }
 
-    this.setState(
-      prevSt => ({
-        jokeList: [...prevSt.jokeList, ...jokes],
-        isLoading: false,
-      }),
-      () => localStorage.setItem('jokes', JSON.stringify(this.state.jokeList))
-    )
+      this.setState(
+        prevSt => ({
+          jokeList: [...prevSt.jokeList, ...jokes],
+          isLoading: false,
+        }),
+        () => localStorage.setItem('jokes', JSON.stringify(this.state.jokeList))
+      )
+    } catch (error) {
+      alert(error.message)
+      this.setState({ isLoading: false })
+    }
   }
 
   handleVote = (jokeId, vote) => {
