@@ -5,6 +5,7 @@ import hazel from '../images/hazel.jpg'
 import tubby from '../images/tubby.jpg'
 import whiskey from '../images/whiskey.jpg'
 
+import Navbar from './Navbar'
 import DogList from './DogList'
 import DogDetails from './DogDetails'
 
@@ -19,14 +20,17 @@ class App extends Component {
     }
 
     return (
-      <Switch>
-        <Route
-          exact
-          path="/dogs"
-          render={() => <DogList dogs={this.props.dogs} />}
-        />
-        <Route exact path="/dogs/:name" render={getDog} />
-      </Switch>
+      <div>
+        <Navbar dogs={this.props.dogs} />
+        <Switch>
+          <Route
+            exact
+            path="/dogs"
+            render={() => <DogList dogs={this.props.dogs} />}
+          />
+          <Route exact path="/dogs/:name" render={getDog} />
+        </Switch>
+      </div>
     )
   }
 }
