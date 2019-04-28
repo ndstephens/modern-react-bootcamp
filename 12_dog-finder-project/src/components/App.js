@@ -1,35 +1,18 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
 import './App.css'
 import hazel from '../images/hazel.jpg'
 import tubby from '../images/tubby.jpg'
 import whiskey from '../images/whiskey.jpg'
 
 import Navbar from './Navbar'
-import DogList from './DogList'
-import DogDetails from './DogDetails'
+import Routes from './Routes'
 
 class App extends Component {
   render() {
-    const getDog = props => {
-      const name = props.match.params.name
-      const currentDog = this.props.dogs.find(
-        dog => dog.name.toLowerCase() === name.toLowerCase()
-      )
-      return <DogDetails {...props} dog={currentDog} />
-    }
-
     return (
       <div>
         <Navbar dogs={this.props.dogs} />
-        <Switch>
-          <Route
-            exact
-            path="/dogs"
-            render={() => <DogList dogs={this.props.dogs} />}
-          />
-          <Route exact path="/dogs/:name" render={getDog} />
-        </Switch>
+        <Routes dogs={this.props.dogs} />
       </div>
     )
   }
