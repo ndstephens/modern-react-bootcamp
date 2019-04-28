@@ -6,12 +6,26 @@ import tubby from '../images/tubby.jpg'
 import whiskey from '../images/whiskey.jpg'
 
 import DogList from './DogList'
+import DogDetails from './DogDetails'
 
 class App extends Component {
   render() {
+    const getDog = props => {
+      const name = props.match.params.name
+      const currentDog = this.props.dogs.find(
+        dog => dog.name.toLowerCase() === name.toLowerCase()
+      )
+      return <DogDetails {...props} dog={currentDog} />
+    }
+
     return (
       <Switch>
-        <Route path="/dogs" render={() => <DogList dogs={this.props.dogs} />} />
+        <Route
+          exact
+          path="/dogs"
+          render={() => <DogList dogs={this.props.dogs} />}
+        />
+        <Route exact path="/dogs/:name" render={getDog} />
       </Switch>
     )
   }
