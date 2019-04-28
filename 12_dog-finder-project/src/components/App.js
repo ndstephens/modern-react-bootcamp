@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import './App.css'
+import hazel from '../images/hazel.jpg'
+import tubby from '../images/tubby.jpg'
+import whiskey from '../images/whiskey.jpg'
 
-function App() {
-  return (
-    <div className="App">
-      <h1>App</h1>
-    </div>
-  )
+import DogList from './DogList'
+
+class App extends Component {
+  render() {
+    return (
+      <Switch>
+        <Route path="/dogs" render={() => <DogList dogs={this.props.dogs} />} />
+      </Switch>
+    )
+  }
 }
 
 App.defaultProps = {
