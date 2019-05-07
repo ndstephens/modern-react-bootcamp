@@ -13,7 +13,7 @@ function EditTodoForm({ id, task, toggleIsEditing, updateTodo }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+    <form onSubmit={handleSubmit} style={{ width: '100%', margin: '0 1rem' }}>
       <TextField
         autoFocus
         value={updatedTask}
