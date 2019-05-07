@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import uuid from 'uuid/v4'
+import React, { useEffect } from 'react'
+import useTodoState from '../hooks/useTodoState'
 
 import TodoList from './TodoList'
 import TodoForm from './TodoForm'
@@ -11,37 +11,19 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 
 function TodoApp(props) {
-  const initialState = JSON.parse(localStorage.getItem('todos')) || []
+  const initialTodos = JSON.parse(localStorage.getItem('todos')) || []
 
-  const [todos, setTodos] = useState(initialState)
+  const {
+    todos,
+    addTodo,
+    toggleCompleted,
+    updateTodo,
+    removeTodo,
+  } = useTodoState(initialTodos)
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
   }, [todos])
-
-  const addTodo = newTodoText => {
-    setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
-  }
-
-  const toggleCompleted = todoId => {
-    setTodos(
-      todos.map(todo =>
-        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
-      )
-    )
-  }
-
-  const updateTodo = (todoId, updatedTask) => {
-    setTodos(
-      todos.map(todo =>
-        todo.id === todoId ? { ...todo, task: updatedTask } : todo
-      )
-    )
-  }
-
-  const removeTodo = todoId => {
-    setTodos(todos.filter(todo => todo.id !== todoId))
-  }
 
   return (
     <Paper
