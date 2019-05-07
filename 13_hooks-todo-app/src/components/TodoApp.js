@@ -23,16 +23,24 @@ function TodoApp(props) {
     setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
   }
 
-  const removeTodo = todoId => {
-    setTodos(todos.filter(todo => todo.id !== todoId))
-  }
-
   const toggleCompleted = todoId => {
     setTodos(
       todos.map(todo =>
         todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
       )
     )
+  }
+
+  const updateTodo = (todoId, updatedTask) => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === todoId ? { ...todo, task: updatedTask } : todo
+      )
+    )
+  }
+
+  const removeTodo = todoId => {
+    setTodos(todos.filter(todo => todo.id !== todoId))
   }
 
   return (
@@ -55,8 +63,9 @@ function TodoApp(props) {
           <TodoForm addTodo={addTodo} />
           <TodoList
             todos={todos}
-            removeTodo={removeTodo}
             toggleCompleted={toggleCompleted}
+            updateTodo={updateTodo}
+            removeTodo={removeTodo}
           />
         </Grid>
       </Grid>
