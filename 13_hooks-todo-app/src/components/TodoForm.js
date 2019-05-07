@@ -1,5 +1,4 @@
 import React from 'react'
-
 import useInputState from '../hooks/useInputState'
 
 import Paper from '@material-ui/core/Paper'
@@ -18,6 +17,7 @@ function TodoForm({ addTodo }) {
     <Paper style={{ margin: '1rem 0', padding: '0 1rem' }}>
       <form onSubmit={handleSubmit}>
         <TextField
+          autoFocus
           value={task}
           onChange={updateTask}
           margin="normal"

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import uuid from 'uuid/v4'
 
 import TodoList from './TodoList'
 import TodoForm from './TodoForm'
@@ -19,7 +20,19 @@ function TodoApp(props) {
   const [todos, setTodos] = useState(initialTodos)
 
   const addTodo = newTodoText => {
-    setTodos([...todos, { id: 4, task: newTodoText, completed: false }])
+    setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
+  }
+
+  const removeTodo = todoId => {
+    setTodos(todos.filter(todo => todo.id !== todoId))
+  }
+
+  const toggleCompleted = todoId => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo
+      )
+    )
   }
 
   return (
@@ -40,7 +53,11 @@ function TodoApp(props) {
       <Grid container justify="center" style={{ marginTop: '1rem' }}>
         <Grid item xs={11} md={6} lg={4}>
           <TodoForm addTodo={addTodo} />
-          <TodoList todos={todos} />
+          <TodoList
+            todos={todos}
+            removeTodo={removeTodo}
+            toggleCompleted={toggleCompleted}
+          />
         </Grid>
       </Grid>
     </Paper>
