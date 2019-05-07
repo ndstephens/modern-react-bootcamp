@@ -9,7 +9,7 @@ function TodoForm({ addTodo }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    addTodo(task)
+    addTodo(task) // handle in TodoApp
     resetTask()
   }
 

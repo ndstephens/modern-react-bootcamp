@@ -22,7 +22,7 @@ function Todo({
   const [isEditing, toggleIsEditing] = useToggleState(false)
 
   const handleCompleted = () => {
-    toggleCompleted(id)
+    toggleCompleted(id) // handle in TodoApp
   }
 
   const handleToggleEditing = () => {
@@ -30,12 +30,13 @@ function Todo({
   }
 
   const handleDelete = () => {
-    removeTodo(id)
+    removeTodo(id) // handle in TodoApp
   }
 
   return (
     <ListItem style={{ height: '64px' }}>
       {isEditing ? (
+        //? EDIT FORM -- DISPLAY WHEN EDITING
         <EditTodoForm
           id={id}
           task={task}
@@ -43,6 +44,7 @@ function Todo({
           updateTodo={updateTodo}
         />
       ) : (
+        //? TODO ROW -- DISPLAY WHEN NOT EDITING
         <>
           {/* CHECKBOX -- COMPLETED */}
           <Checkbox

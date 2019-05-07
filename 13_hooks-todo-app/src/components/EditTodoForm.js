@@ -8,8 +8,8 @@ function EditTodoForm({ id, task, toggleIsEditing, updateTodo }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    updateTodo(id, updatedTask)
-    toggleIsEditing()
+    updateTodo(id, updatedTask) // handle in TodoApp
+    toggleIsEditing() // exit from editing state
   }
 
   return (
