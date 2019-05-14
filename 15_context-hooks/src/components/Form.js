@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 
 import { withStyles } from '@material-ui/core/styles'
 import styles from '../styles/FormStyles'
@@ -7,7 +7,6 @@ import { LanguageContext } from '../contexts/LanguageContext'
 
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
-// import CssBaseline from '@material-ui/core/CssBaseline'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -43,70 +42,66 @@ const languageContent = {
   },
 }
 
-class Form extends Component {
-  static contextType = LanguageContext
+function Form({ classes }) {
+  const { language, updateLanguage } = useContext(LanguageContext)
 
-  render() {
-    const { classes } = this.props
-    const { language, updateLanguage } = this.context
-    const {
-      headerText,
-      email,
-      password,
-      checkboxText,
-      buttonText,
-    } = languageContent[language]
+  const {
+    headerText,
+    email,
+    password,
+    checkboxText,
+    buttonText,
+  } = languageContent[language]
 
-    return (
-      <main className={classes.main}>
-        <Paper className={classes.paper}>
-          {/* LOCK ICON */}
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+  return (
+    <main className={classes.main}>
+      <Paper className={classes.paper}>
+        {/* LOCK ICON */}
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
 
-          {/* HEADER */}
-          <Typography variant="h5">{headerText}</Typography>
+        {/* HEADER */}
+        <Typography variant="h5">{headerText}</Typography>
 
-          {/* LANGUAGE SELECT */}
-          <Select value={language} onChange={updateLanguage}>
-            <MenuItem value="EN">English</MenuItem>
-            <MenuItem value="FR">French</MenuItem>
-            <MenuItem value="SP">Spanish</MenuItem>
-          </Select>
+        {/* LANGUAGE SELECT */}
+        <Select value={language} onChange={updateLanguage}>
+          <MenuItem value="EN">English</MenuItem>
+          <MenuItem value="FR">French</MenuItem>
+          <MenuItem value="SP">Spanish</MenuItem>
+        </Select>
 
-          {/* SIGN-IN FORM */}
-          <form className={classes.form}>
-            {/* EMAIL */}
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">{email}</InputLabel>
-              <Input id="email" name="email" autoFocus />
-            </FormControl>
-            {/* PASSWORD */}
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">{password}</InputLabel>
-              <Input id="password" name="password" />
-            </FormControl>
-            {/* CHECKBOX */}
-            <FormControlLabel
-              control={<Checkbox color="primary" />}
-              label={checkboxText}
-            />
-            {/* SIGN-IN BUTTON */}
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              color="primary"
-              className={classes.submit}
-            >
-              {buttonText}
-            </Button>
-          </form>
-        </Paper>
-      </main>
-    )
-  }
+        {/* SIGN-IN FORM */}
+        <form className={classes.form}>
+          {/* EMAIL */}
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="email">{email}</InputLabel>
+            <Input id="email" name="email" autoFocus />
+          </FormControl>
+          {/* PASSWORD */}
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="password">{password}</InputLabel>
+            <Input id="password" name="password" />
+          </FormControl>
+          {/* CHECKBOX */}
+          <FormControlLabel
+            control={<Checkbox color="primary" />}
+            label={checkboxText}
+          />
+          {/* SIGN-IN BUTTON */}
+          <Button
+            variant="contained"
+            type="submit"
+            fullWidth
+            color="primary"
+            className={classes.submit}
+          >
+            {buttonText}
+          </Button>
+        </form>
+      </Paper>
+    </main>
+  )
 }
 
 export default withStyles(styles)(Form)
