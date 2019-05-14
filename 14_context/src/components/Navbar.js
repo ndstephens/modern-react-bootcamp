@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import styles from '../styles/NavbarStyles'
 
 import { ThemeContext } from '../contexts/ThemeContext'
+import { withLanguageContext } from '../contexts/LanguageContext'
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -13,11 +14,28 @@ import InputBase from '@material-ui/core/InputBase'
 import Switch from '@material-ui/core/Switch'
 import SearchIcon from '@material-ui/icons/Search'
 
+const languageContent = {
+  EN: {
+    search: 'Search',
+    flag: '🇬🇧',
+  },
+  FR: {
+    search: 'Chercher',
+    flag: '🇫🇷',
+  },
+  SP: {
+    search: 'Buscar',
+    flag: '🇪🇸',
+  },
+}
+
 class Navbar extends Component {
   static contextType = ThemeContext
 
   render() {
     const { classes } = this.props
+    const { language } = this.props.languageContext
+    const { search, flag } = languageContent[language]
     const { isDarkTheme, toggleTheme } = this.context
 
     return (
@@ -27,7 +45,7 @@ class Navbar extends Component {
             {/* FLAG */}
             <IconButton className={classes.menuButton} color="inherit">
               <span role="img" aria-label="French Flag">
-                🇫🇷
+                {flag}
               </span>
             </IconButton>
 
@@ -47,7 +65,7 @@ class Navbar extends Component {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search..."
+                placeholder={`${search}...`}
                 classes={{ root: classes.inputRoot, input: classes.inputInput }}
               />
             </div>
@@ -58,4 +76,4 @@ class Navbar extends Component {
   }
 }
 
-export default withStyles(styles)(Navbar)
+export default withStyles(styles)(withLanguageContext(Navbar))

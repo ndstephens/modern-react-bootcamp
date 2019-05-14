@@ -19,7 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 
-const text = {
+const languageContent = {
   EN: {
     headerText: 'Sign In',
     email: 'Email',
@@ -49,9 +49,13 @@ class Form extends Component {
   render() {
     const { classes } = this.props
     const { language, updateLanguage } = this.context
-    const { headerText, email, password, checkboxText, buttonText } = text[
-      language
-    ]
+    const {
+      headerText,
+      email,
+      password,
+      checkboxText,
+      buttonText,
+    } = languageContent[language]
 
     return (
       <main className={classes.main}>
