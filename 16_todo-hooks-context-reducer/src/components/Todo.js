@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import useToggleState from '../hooks/useToggleState'
+import { TodosContext } from '../context/todo.context'
 
 import EditTodoForm from './EditTodoForm'
 
@@ -11,18 +12,12 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 
-function Todo({
-  id,
-  task,
-  completed,
-  toggleCompleted,
-  updateTodo,
-  removeTodo,
-}) {
+function Todo({ id, task, completed }) {
   const [isEditing, toggleIsEditing] = useToggleState(false)
+  const { toggleCompleted, removeTodo } = useContext(TodosContext)
 
   const handleCompleted = () => {
-    toggleCompleted(id) // handle in TodoApp
+    toggleCompleted(id)
   }
 
   const handleToggleEditing = () => {
@@ -30,19 +25,14 @@ function Todo({
   }
 
   const handleDelete = () => {
-    removeTodo(id) // handle in TodoApp
+    removeTodo(id)
   }
 
   return (
     <ListItem style={{ height: '64px' }}>
       {isEditing ? (
         //? EDIT FORM -- DISPLAY WHEN EDITING
-        <EditTodoForm
-          id={id}
-          task={task}
-          toggleIsEditing={toggleIsEditing}
-          updateTodo={updateTodo}
-        />
+        <EditTodoForm id={id} task={task} toggleIsEditing={toggleIsEditing} />
       ) : (
         //? TODO ROW -- DISPLAY WHEN NOT EDITING
         <>

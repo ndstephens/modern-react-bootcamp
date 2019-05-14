@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import useInputState from '../hooks/useInputState'
+import { TodosContext } from '../context/todo.context'
 
 import TextField from '@material-ui/core/TextField'
 
-function EditTodoForm({ id, task, toggleIsEditing, updateTodo }) {
+function EditTodoForm({ id, task, toggleIsEditing }) {
   const [updatedTask, setUpdatedTask] = useInputState(task)
+  const { updateTodo } = useContext(TodosContext)
 
   const handleSubmit = e => {
     e.preventDefault()
-    updateTodo(id, updatedTask) // handle in TodoApp
-    toggleIsEditing() // exit from editing state
+    updateTodo(id, updatedTask)
+    toggleIsEditing() // exit from Edit state
   }
 
   return (
