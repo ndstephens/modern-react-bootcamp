@@ -1,8 +1,10 @@
-import { useState } from 'react'
+//* THIS ISN'T SO MUCH A CUSTOM HOOK AS IT'S AN ABSTRACTION OF FUNCTIONALITY
+
+import useLocalStorageState from './useLocalStorageState'
 import uuid from 'uuid/v4'
 
-const useTodoState = (initialTodos = []) => {
-  const [todos, setTodos] = useState(initialTodos)
+const useTodoState = () => {
+  const [todos, setTodos] = useLocalStorageState('todos')
 
   const addTodo = newTodoText => {
     setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
