@@ -18,22 +18,30 @@ class Navbar extends Component {
 
   render() {
     const { classes } = this.props
-    const { isDarkTheme } = this.context
+    const { isDarkTheme, toggleTheme } = this.context
 
     return (
       <div className={classes.root}>
         <AppBar position="static" color={isDarkTheme ? 'default' : 'primary'}>
           <Toolbar>
+            {/* FLAG */}
             <IconButton className={classes.menuButton} color="inherit">
               <span role="img" aria-label="French Flag">
                 🇫🇷
               </span>
             </IconButton>
+
+            {/* TITLE */}
             <Typography className={classes.title} variant="h6" color="inherit">
               App Title
             </Typography>
-            <Switch />
+
+            {/* THEME SWITCH */}
+            <Switch onChange={toggleTheme} />
+
             <div className={classes.grow} />
+
+            {/* SEARCH INPUT */}
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />

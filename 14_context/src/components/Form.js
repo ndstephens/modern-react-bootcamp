@@ -24,28 +24,39 @@ class Form extends Component {
     return (
       <main className={classes.main}>
         <Paper className={classes.paper}>
+          {/* LOCK ICON */}
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
+
+          {/* HEADER */}
           <Typography variant="h5">Sign In</Typography>
+
+          {/* LANGUAGE SELECT */}
           <Select value="english">
             <MenuItem value="english">English</MenuItem>
             <MenuItem value="french">French</MenuItem>
             <MenuItem value="spanish">Spanish</MenuItem>
           </Select>
+
+          {/* SIGN-IN FORM */}
           <form className={classes.form}>
+            {/* EMAIL */}
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email</InputLabel>
               <Input id="email" name="email" autoFocus />
             </FormControl>
+            {/* PASSWORD */}
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
               <Input id="password" name="password" />
             </FormControl>
+            {/* CHECKBOX */}
             <FormControlLabel
               control={<Checkbox color="primary" />}
               label="Remember Me"
             />
+            {/* SIGN-IN BUTTON */}
             <Button
               variant="contained"
               type="submit"
