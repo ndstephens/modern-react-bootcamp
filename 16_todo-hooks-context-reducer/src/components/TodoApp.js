@@ -1,6 +1,8 @@
 import React from 'react'
 import useTodoState from '../hooks/useTodoState'
 
+import TodosProvider from '../context/todo.context'
+
 import TodoList from './TodoList'
 import TodoForm from './TodoForm'
 
@@ -37,17 +39,19 @@ function TodoApp(props) {
 
       <Grid container justify="center" style={{ marginTop: '1rem' }}>
         <Grid item xs={11} md={6} lg={4}>
-          {/* NEW TODO INPUT */}
-          <TodoForm addTodo={addTodo} />
-          {/* TODO LIST */}
-          {todos.length ? (
-            <TodoList
-              todos={todos}
-              toggleCompleted={toggleCompleted}
-              updateTodo={updateTodo}
-              removeTodo={removeTodo}
-            />
-          ) : null}
+          <TodosProvider>
+            {/* NEW TODO INPUT */}
+            <TodoForm addTodo={addTodo} />
+            {/* TODO LIST */}
+            {todos.length ? (
+              <TodoList
+                todos={todos}
+                toggleCompleted={toggleCompleted}
+                updateTodo={updateTodo}
+                removeTodo={removeTodo}
+              />
+            ) : null}
+          </TodosProvider>
         </Grid>
       </Grid>
     </Paper>

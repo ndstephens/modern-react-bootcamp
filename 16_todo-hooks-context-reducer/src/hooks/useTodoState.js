@@ -3,8 +3,8 @@
 import useLocalStorageState from './useLocalStorageState'
 import uuid from 'uuid/v4'
 
-const useTodoState = () => {
-  const [todos, setTodos] = useLocalStorageState('todos')
+const useTodoState = (initialState = null) => {
+  const [todos, setTodos] = useLocalStorageState('todos', initialState)
 
   const addTodo = newTodoText => {
     setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }])
