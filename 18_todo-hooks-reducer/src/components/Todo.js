@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import useToggleState from '../hooks/useToggleState'
-import { TodosContext } from '../context/todo.context'
+import { DispatchContext } from '../context/todo.context'
 
 import EditTodoForm from './EditTodoForm'
 
@@ -14,7 +14,7 @@ import EditIcon from '@material-ui/icons/Edit'
 
 function Todo({ id, task, completed }) {
   const [isEditing, toggleIsEditing] = useToggleState(false)
-  const { dispatch } = useContext(TodosContext)
+  const dispatch = useContext(DispatchContext)
 
   const handleCompleted = () => {
     dispatch({ type: 'TOGGLE', todoId: id })
