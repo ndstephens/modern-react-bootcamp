@@ -1,17 +1,19 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext } from 'react'
+import useLocalStorageReducer from '../hooks/useLocalStorageReducer'
 import todoReducer from '../reducers/todo.reducer'
 
-const defaultTodos = [
-  { id: 1, task: 'mow lawn', completed: false },
-  { id: 2, task: 'work on garden', completed: true },
-]
+const defaultTodos = [{ id: 1, task: 'create some todos', completed: false }]
 
 //? Split into 2 contexts for performance (prevent unnecessary re-renders)
 export const TodosContext = createContext()
 export const DispatchContext = createContext()
 
 function TodosProvider(props) {
-  const [todos, dispatch] = useReducer(todoReducer, defaultTodos)
+  const [todos, dispatch] = useLocalStorageReducer(
+    'todos',
+    todoReducer,
+    defaultTodos
+  )
 
   return (
     //* don't wrap in braces again (NO --> {{ todos }} / {{ dispatch }})
