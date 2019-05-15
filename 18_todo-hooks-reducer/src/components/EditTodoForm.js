@@ -6,11 +6,11 @@ import TextField from '@material-ui/core/TextField'
 
 function EditTodoForm({ id, task, toggleIsEditing }) {
   const [updatedTask, setUpdatedTask] = useInputState(task)
-  const { updateTodo } = useContext(TodosContext)
+  const { dispatch } = useContext(TodosContext)
 
   const handleSubmit = e => {
     e.preventDefault()
-    updateTodo(id, updatedTask)
+    dispatch({ type: 'UPDATE', todoId: id, updatedTask })
     toggleIsEditing() // exit from Edit state
   }
 

@@ -14,10 +14,10 @@ import EditIcon from '@material-ui/icons/Edit'
 
 function Todo({ id, task, completed }) {
   const [isEditing, toggleIsEditing] = useToggleState(false)
-  const { toggleCompleted, removeTodo } = useContext(TodosContext)
+  const { dispatch } = useContext(TodosContext)
 
   const handleCompleted = () => {
-    toggleCompleted(id)
+    dispatch({ type: 'TOGGLE', todoId: id })
   }
 
   const handleToggleEditing = () => {
@@ -25,7 +25,7 @@ function Todo({ id, task, completed }) {
   }
 
   const handleDelete = () => {
-    removeTodo(id)
+    dispatch({ type: 'REMOVE', todoId: id })
   }
 
   return (
