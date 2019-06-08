@@ -16,7 +16,7 @@
 
 .Board__container {
   margin: 0 auto;
-  width: 60vw;
+  width: 60vmin;
   border-radius: 3px;
   overflow: hidden;
   border: 2px solid #225;
